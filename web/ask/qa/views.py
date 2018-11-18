@@ -7,31 +7,28 @@ def test(request, *args, **kwargs):
 
 
 def root(request, *args, **kwargs):
-    return HttpResponse(status=404)
+    return render(request, 'qa/basic.html')
 
 
 def login(request, *args, **kwargs):
-    return HttpResponse(status=404)
+    return render(request, 'qa/basic.html')
 
 
 def signup(request, *args, **kwargs):
-    return HttpResponse(status=404)
+    return render(request, 'qa/basic.html')
 
 
 def question(request, id, *args, **kwargs):
-    print(id)
-    print(type(id))
-
-    return HttpResponse(id)
+    return render(request, 'qa/basic.html')
 
 
 def ask(request, *args, **kwargs):
-    return HttpResponse(status=404)
+    return render(request, 'qa/basic.html')
 
 
 def popular(request, *args, **kwargs):
-    return HttpResponse(status=404)
+    return render(request, 'qa/basic.html')
 
 
 def new(request, *args, **kwargs):
-    return HttpResponse(status=404)
+    return render(request, 'qa/basic.html')
