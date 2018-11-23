@@ -16,7 +16,7 @@ class Question(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField()
-    author = User
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     likes = models.IntegerField()
 
 
@@ -24,4 +24,4 @@ class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(auto_now_add=True)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    author = User
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
