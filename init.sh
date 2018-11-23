@@ -1,6 +1,7 @@
 ﻿# dont forget that in gunicorn configs python 3.5 should be used
 # all changed filed i added to an "edinorogs" directory
 apt-get update
+pip install pymysql
 #apt-get -y install libffi-dev
 # for python 3.5
 apt-get install -f python3.5
@@ -33,5 +34,5 @@ sudo /etc/init.d/nginx restart
 sudo /etc/init.d/gunicorn restartc
 # working with database
 mysql -u root -e "CREATE DATABASE stepik CHARACTER SET utf8;"
-web/ask/manage.py makemigrations
-web/ask/manage.py migrate
+python3.5 web/ask/manage.py makemigrations
+python3.5 web/ask/manage.py migrate
