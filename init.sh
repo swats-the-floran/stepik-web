@@ -19,6 +19,7 @@ python3.5 get-pip.py
 # installing libraries
 pip install django
 pip install gunicorn
+pip isntall pymysql
 # configs
 rm /etc/nginx/sites-enabled/default
 cp web/etc/nginx.conf  /etc/nginx/sites-enabled/test.conf
@@ -30,7 +31,7 @@ cp edinorogs/gunicorn_* /usr/sbin/
 sudo /etc/init.d/mysql start
 sudo /etc/init.d/nginx restart
 sudo /etc/init.d/gunicorn restartc
-# other stuff
+# working with database
 mysql -u root -e "CREATE DATABASE stepik CHARACTER SET utf8;"
 ./manage.py makemigrations
 ./manage.py migrate
