@@ -33,5 +33,5 @@ sudo /etc/init.d/nginx restart
 sudo /etc/init.d/gunicorn restartc
 # working with database
 mysql -u root -e "CREATE DATABASE stepik CHARACTER SET utf8;"
-./manage.py makemigrations
-./manage.py migrate
+web/ask/manage.py makemigrations
+web/ask/manage.py migrate
