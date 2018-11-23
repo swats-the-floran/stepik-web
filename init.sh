@@ -33,6 +33,10 @@ sudo /etc/init.d/mysql start
 sudo /etc/init.d/nginx restart
 sudo /etc/init.d/gunicorn restart
 # working with database
-mysql -u root -e "CREATE DATABASE stepik CHARACTER SET utf8;"
+mysql -uroot -e "CREATE DATABASE djbase;"
+mysql -uroot -e "CREATE USER 'django@localhost' IDENTIFIED BY 'pass123';"
+mysql -uroot -e "GRANT ALL ON dj.* TO 'django@localhost';"
+mysql -uroot -e "GRANT USAGE ON *.* TO 'django@localhost';"
+mysql -uroot -e "FLUSH PRIVILEGES;" 
 python3.5 web/ask/manage.py makemigrations
 python3.5 web/ask/manage.py migrate
