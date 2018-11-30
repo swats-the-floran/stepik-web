@@ -4,10 +4,10 @@ from django.contrib.auth.models import User
 
 class QuestionManager(models.Manager):
     def new(self):
-        pass
+        return Question.objects.order_by('-id')
 
     def popular(self):
-        pass
+        return Question.objects.order_by('-rating')
 
 
 class Question(models.Model):

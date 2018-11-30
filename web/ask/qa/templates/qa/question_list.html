@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page_title }}</title>
+</head>
+<body>
+<h1>{{ page_title }}</h1>
+
+<nav><ul class="pagination">
+{% for page in paginator.page_range %}
+    {% if page.number == this_page.number %}
+    <li class="active">
+    {% else %}
+    <li>
+    {% endif %}
+        <a href="{{ paginator.base_url }}{{ page }}">{{ page }}</a>
+    </li>
+{% endfor %}
+</ul></nav>
+
+{% for question in this_page.object_list %}
+<div>
+    <h2>{{ question.title }}</h2>
+    <a href="/question/{{ question.pk }}">{{ question.pk }}</a>
+    <hr>
+</div>
+{% endfor %}
+
+</body>
+</html>

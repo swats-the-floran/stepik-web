@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.core.paginator import Paginator
+from .models import Question, Answer
 
 
 def test(request, *args, **kwargs):
@@ -18,8 +20,14 @@ def signup(request, *args, **kwargs):
     return render(request, 'qa/basic.html')
 
 
-def question(request, id, *args, **kwargs):
-    return render(request, 'qa/basic.html')
+def question(request, pk, *args, **kwargs):
+    qst = get_object_or_404(Question, pk=pk)
+    ans = Answer.objects.filter(question=qst)
+    context = {
+        'question': qst,
+        'answers': ans,
+    }
+    return render(request, 'qa/question_detail.html', context=context)
 
 
 def ask(request, *args, **kwargs):
@@ -27,8 +35,30 @@ def ask(request, *args, **kwargs):
 
 
 def popular(request, *args, **kwargs):
-    return render(request, 'qa/basic.html')
+    qst = Question.objects.popular()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(qst, 10)
+    paginator.base_url = '?page='
+    page = paginator.page(page)
+    context = {
+        'page_title': 'Popular Questions:',
+        'paginator': paginator,
+        'this_page': page,
+        'questions': qst,
+    }
+    return render(request, 'qa/question_list.html', context=context)
 
 
 def new(request, *args, **kwargs):
-    return render(request, 'qa/basic.html')
+    qst = Question.objects.new()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(qst, 10)
+    paginator.base_url = '?page='
+    page = paginator.page(page)
+    context = {
+        'page_title': 'Popular Questions:',
+        'paginator': paginator,
+        'this_page': page,
+        'questions': qst,
+    }
+    return render(request, 'qa/question_list.html', context=context)
