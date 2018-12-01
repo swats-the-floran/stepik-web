@@ -1,7 +1,7 @@
 ﻿# dont forget that in gunicorn configs python 3.5 should be used
 # all changed filed i added to an "edinorogs" directory
 apt-get update
-pip install pymysql
+# pip install pymysql
 #apt-get -y install libffi-dev
 # for python 3.5
 apt-get install -y python3.5
@@ -20,7 +20,7 @@ python3.5 get-pip.py
 # installing libraries
 pip install django
 pip install gunicorn
-pip install pymysql
+#pip install pymysql
 # configs
 rm /etc/nginx/sites-enabled/default
 cp web/etc/nginx.conf  /etc/nginx/sites-enabled/test.conf
@@ -33,10 +33,5 @@ sudo /etc/init.d/mysql start
 sudo /etc/init.d/nginx restart
 sudo /etc/init.d/gunicorn restart
 # working with database
-mysql -uroot -e "CREATE DATABASE djbase;"
-mysql -uroot -e "CREATE USER 'django@localhost' IDENTIFIED BY 'pass123';"
-mysql -uroot -e "GRANT ALL ON dj.* TO 'django@localhost';"
-mysql -uroot -e "GRANT USAGE ON *.* TO 'django@localhost';"
-mysql -uroot -e "FLUSH PRIVILEGES;"
 python3.5 web/ask/manage.py makemigrations
 python3.5 web/ask/manage.py migrate
