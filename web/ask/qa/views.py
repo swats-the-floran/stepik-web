@@ -43,7 +43,7 @@ def popular(request, *args, **kwargs):
     context = {
         'page_title': 'Popular Questions:',
         'paginator': paginator,
-        'this_page': page,
+        'page': page,
         'questions': qst,
     }
     return render(request, 'qa/question_list.html', context=context)
@@ -56,9 +56,9 @@ def new(request, *args, **kwargs):
     paginator.base_url = '?page='
     page = paginator.page(page)
     context = {
-        'page_title': 'Popular Questions:',
+        'page_title': 'New Questions:',
         'paginator': paginator,
-        'this_page': page,
+        'page': page,
         'questions': qst,
     }
     return render(request, 'qa/question_list.html', context=context)
