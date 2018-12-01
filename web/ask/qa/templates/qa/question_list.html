@@ -14,12 +14,12 @@
     {% else %}
     <li>
     {% endif %}
-        <a href="{{ paginator.base_url }}{{ page }}">{{ page }}</a>
+        <a href="{{ paginator.base_url }}{{ pg }}">{{ pg }}</a>
     </li>
 {% endfor %}
 </ul></nav>
 
-{% for question in this_page.object_list %}
+{% for question in page.object_list %}
 <div>
     <h2>{{ question.title }}</h2>
     <a href="/question/{{ question.pk }}">{{ question.pk }}</a>
