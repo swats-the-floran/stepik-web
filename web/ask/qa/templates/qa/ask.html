@@ -3,34 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <title>{{ question.title }}</title>
-    <style>.question-meta p {font-size: 0.7rem; margin-bottom: 0;}</style>
 </head>
 <body>
+
+
 <div class="container">
-    <center><h1>{{ question.title }}</h1></center>
-
-    <div>
-        <p>{{ question.text }}</p>
-    </div>
-
-    <div class="question-meta">
-        <p>Author: {{ question.author }}<span style="float: right;">Posted: {{ question.added_at }}</span></p>
-        <p>Rating: {{ question.rating }}</p>
-        <p>Likes:
-        {% for like in question.likes.all %}
-            {{ like }} </p>
-        {% endfor %}
-    </div>
-
-    <hr>
-
-    <div>
-        {% for answer in question.answer_set.all %}
-            <p><strong>{{ answer.author }}:</strong> {{ answer.text }}</p>
-        {% endfor %}
-    </div>
-
     {% for e in form.non_field_errors %}
     <div class="alert alert-danger">
         {{ e }}
@@ -42,9 +19,7 @@
         <fieldset>
             {% for field in form %}
                 <div class="control-group {% if field.errors %}has-error{% endif %}">
-                    {% if field.field.widget.input_type != 'hidden' %}
                     <label class="control-label">{{ field.label }}</label>
-                    {% endif %}
                     <div class="controls">{{ field }}</div>
                 </div>
             {% endfor %}
@@ -55,7 +30,6 @@
             </button>
         </div>
     </form>
-
 </div>
 
 </body>

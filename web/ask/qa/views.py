@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator
 from .models import Question, Answer
+from .forms import AskForm, AnswerForm
 
 
 def test(request, *args, **kwargs):
@@ -22,16 +23,32 @@ def signup(request, *args, **kwargs):
 
 def question(request, pk, *args, **kwargs):
     qst = get_object_or_404(Question, pk=pk)
-    ans = Answer.objects.filter(question=qst)
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        # print(form.is_valid())
+        if form.is_valid():
+            answer = form.save()
+            return HttpResponseRedirect(qst.get_url())
+    else:
+        form = AnswerForm(initial={'question': qst.id})
     context = {
         'question': qst,
-        'answers': ans,
+        'form': form,
     }
     return render(request, 'qa/question_detail.html', context=context)
 
 
 def ask(request, *args, **kwargs):
-    return render(request, 'qa/basic.html')
+    if request.method == 'POST':
+        form = AskForm(request.POST)
+        if form.is_valid():
+            question = form.save()  # probably None type can come here
+            url = question.get_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = AskForm()
+    return render(request, 'qa/ask.html', context={'form': form})
+
 
 
 def popular(request, *args, **kwargs):
